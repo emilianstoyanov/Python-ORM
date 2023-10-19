@@ -1,0 +1,57 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="44">
+            <item index="0" class="java.lang.String" itemvalue="cs.cp" />
+            <item index="1" class="java.lang.String" itemvalue="cs.powerreports" />
+            <item index="2" class="java.lang.String" itemvalue="cs.fileclient" />
+            <item index="3" class="java.lang.String" itemvalue="cs.resources" />
+            <item index="4" class="java.lang.String" itemvalue="cs.classification" />
+            <item index="5" class="java.lang.String" itemvalue="cs.workspaces" />
+            <item index="6" class="java.lang.String" itemvalue="cs.activitystream" />
+            <item index="7" class="java.lang.String" itemvalue="cs.licreport" />
+            <item index="8" class="java.lang.String" itemvalue="cs.web" />
+            <item index="9" class="java.lang.String" itemvalue="cs.vp" />
+            <item index="10" class="java.lang.String" itemvalue="cs.taskboard" />
+            <item index="11" class="java.lang.String" itemvalue="cs.vp-pcs" />
+            <item index="12" class="java.lang.String" itemvalue="cust.plg" />
+            <item index="13" class="java.lang.String" itemvalue="cs.admin" />
+            <item index="14" class="java.lang.String" itemvalue="cs.defects" />
+            <item index="15" class="java.lang.String" itemvalue="cs.metrics" />
+            <item index="16" class="java.lang.String" itemvalue="cs.dsig" />
+            <item index="17" class="java.lang.String" itemvalue="cs.powerscriptstudio" />
+            <item index="18" class="java.lang.String" itemvalue="cs.threed" />
+            <item index="19" class="java.lang.String" itemvalue="cs.dsig-pdf" />
+            <item index="20" class="java.lang.String" itemvalue="cs.pdx" />
+            <item index="21" class="java.lang.String" itemvalue="cs.docportal" />
+            <item index="22" class="java.lang.String" itemvalue="cs.noteslink" />
+            <item index="23" class="java.lang.String" itemvalue="cs.bomcreator" />
+            <item index="24" class="java.lang.String" itemvalue="cscdb.product" />
+            <item index="25" class="java.lang.String" itemvalue="cs.documents" />
+            <item index="26" class="java.lang.String" itemvalue="csdemo.all" />
+            <item index="27" class="java.lang.String" itemvalue="cs.actions" />
+            <item index="28" class="java.lang.String" itemvalue="cs.launchpad" />
+            <item index="29" class="java.lang.String" itemvalue="cs.workflow" />
+            <item index="30" class="java.lang.String" itemvalue="cs.taskmanager" />
+            <item index="31" class="java.lang.String" itemvalue="cs.costing" />
+            <item index="32" class="java.lang.String" itemvalue="cs.mfa" />
+            <item index="33" class="java.lang.String" itemvalue="cs.officelink" />
+            <item index="34" class="java.lang.String" itemvalue="cs.base" />
+            <item index="35" class="java.lang.String" itemvalue="cs.designsystem" />
+            <item index="36" class="java.lang.String" itemvalue="cs.variants" />
+            <item index="37" class="java.lang.String" itemvalue="cs.ec" />
+            <item index="38" class="java.lang.String" itemvalue="cs.innovation" />
+            <item index="39" class="java.lang.String" itemvalue="cs.projectcosts" />
+            <item index="40" class="java.lang.String" itemvalue="cs.requirements" />
+            <item index="41" class="java.lang.String" itemvalue="cs.pcs" />
+            <item index="42" class="java.lang.String" itemvalue="cs.licdashboard" />
+            <item index="43" class="java.lang.String" itemvalue="cs.portfolios" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
