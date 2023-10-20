@@ -1,7 +1,9 @@
+from django.core.validators import MaxValueValidator
 from django.db import models
 
 
 # Create your models here.
+from .validator import validate_age
 
 
 class Person(models.Model):
@@ -170,3 +172,17 @@ class Book(models.Model):
     #  It helps us to see the name of the book in the admin panel
     def __str__(self):
         return self.title
+
+
+class CustomPerson(models.Model):
+    name = models.CharField(
+        max_length=30,
+    )
+
+    age = models.PositiveIntegerField(
+        validators=[
+            # validate_age
+            MaxValueValidator(120)
+        ]
+
+    )

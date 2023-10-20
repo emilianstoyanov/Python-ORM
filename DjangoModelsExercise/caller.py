@@ -2,9 +2,19 @@ import os
 import django
 
 # Set up Django
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tasks.settings")
+from django.core.exceptions import ValidationError
+from tasks.models import CustomPerson
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "djangoorm.settings")
 django.setup()
 
-# Import your models
-# Create and check models
-# Run and print your queries
+try:
+    invalid_person = CustomPerson(
+        name="Emilian",
+        age=150,
+    )
+
+    invalid_person.full_clean()
+
+except ValidationError as e:
+    print(e)
