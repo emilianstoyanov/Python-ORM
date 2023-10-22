@@ -11,8 +11,6 @@ import string
 from main_app.models import Product
 
 
-
-
 def handle(self, *args, **options):
     products = Product.objects.all()
 
@@ -27,5 +25,3 @@ def handle(self, *args, **options):
         product.save()
 
         self.stdout.write(self.style.SUCCESS(f'Random number generated and saved for product {product.id}'))
-
-}
