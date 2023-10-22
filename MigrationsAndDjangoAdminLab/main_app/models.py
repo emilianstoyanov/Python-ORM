@@ -1,5 +1,4 @@
 from django.db import models
-from django.db import models
 
 
 class Product(models.Model):
@@ -10,4 +9,5 @@ class Product(models.Model):
     supplier = models.CharField(max_length=150)
     created_on = models.DateTimeField(auto_now_add=True)
     last_edited_on = models.DateTimeField(auto_now=True)
-    count = models.PositiveIntegerField(default=0)
+    # barcode = models.IntegerField()
+    barcode = models.CharField(max_length=10, blank=True, null=True)

@@ -1,5 +1,8 @@
 import os
 import django
+import random
+
+from django.db import migrations
 
 # Set up Django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "orm_skeleton.settings")
@@ -75,6 +78,7 @@ def add_products_with_count_value():
     )
     product6.save()
     return "2 products with count were added to the database"
+
 
 # Run and print your queries
 
