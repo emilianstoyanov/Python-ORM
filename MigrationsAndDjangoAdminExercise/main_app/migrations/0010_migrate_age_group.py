@@ -41,6 +41,7 @@ class Migration(migrations.Migration):
     ]
 
 # 1. Create an empty migration file.
+    # python .\manage.py makemigrations main_app --name  migrate_age_group --empty
 # 2. We create a function  for the specific purpose of changing the database.
 # 3. We execute the command: python manage.py migrate
 # 4. If we want to revert the changes, we run the command: python manage.py migrate main_app <name of previous migration>
