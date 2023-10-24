@@ -123,7 +123,6 @@ python .\manage.py makemigrations <main_app> --name  <migrate_age_group> --empty
                 person.save()
 
 
-        # python .\manage.py makemigrations main_app --name  migrate_age_group --empty
         class Migration(migrations.Migration):
             dependencies = [
                 ('main_app', '0009_person'),
@@ -197,3 +196,9 @@ python .\manage.py makemigrations <main_app> --name  <migrate_age_group> --empty
 ``
     record.delete()
 ``
+
+
+
+
+
+
