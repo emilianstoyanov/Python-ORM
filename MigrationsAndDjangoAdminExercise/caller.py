@@ -5,6 +5,10 @@ import django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "orm_skeleton.settings")
 django.setup()
 
-from main_app.models import Shoe
+# from main_app.models import Shoe
+#
+# print(Shoe.objects.values_list('brand', flat=True).distinct())
 
-print(Shoe.objects.values_list('brand', flat=True).distinct())
+from main_app.models import Person
+
+print(Person.objects.all())

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import EventRegistration, Student, Supplier
+from .models import EventRegistration, Student, Supplier, Person
 
 
 @admin.register(EventRegistration)
@@ -17,7 +17,7 @@ class StudentAdmin(admin.ModelAdmin):
 
     list_filter = ['date_of_birth', 'age', 'grade']
 
-    search_fields = ['first_name',]
+    search_fields = ['first_name', ]
 
     # readonly_fields = ['first_name',]
 
@@ -52,3 +52,12 @@ class SupplierAdmin(admin.ModelAdmin):
             'fields': ('name', 'contact_person', 'email', 'address')
         }),
     )
+
+
+@admin.register(Person)
+class PersonAdmin(admin.ModelAdmin):
+    list_display = ['name', 'age', 'age_group']
+
+    list_filter = ['name', 'age', 'age_group']
+
+    search_fields = ['name', 'age', 'age_group']
