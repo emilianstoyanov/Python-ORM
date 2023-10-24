@@ -6,7 +6,7 @@ from django.db import migrations
 def set_age_group(apps, schema_editor):
     person_model = apps.get_model('main_app', 'Person')
 
-    persons = person_model.object.all()
+    persons = person_model.objects.all()
 
     for person_record in persons:
         if person_record.age <= 12:
@@ -17,7 +17,17 @@ def set_age_group(apps, schema_editor):
             person_record.age_group = 'Adult'
 
     # We save changes to the base once, not every iteration
-    person_model.object.bulk_update(persons, ['age_group'])
+    person_model.objects.bulk_update(persons, ['age_group'])
+
+
+def set_age_group_default(apps, schema_editor):
+    person_model = apps.get_model('main_app', 'Person')
+
+    age_group_default = person_model._meta.get_field('age_group').default
+
+    for person in person_model.objects.all():
+        person.age_group = age_group_default
+        person.save()
 
 
 # python .\manage.py makemigrations main_app --name  migrate_age_group --empty
@@ -27,4 +37,10 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.RunPython(set_age_group, reverse_code=set_age_group_default)
     ]
+
+# 1. Create an empty migration file.
+# 2. We create a function  for the specific purpose of changing the database.
+# 3. We execute the command: python manage.py migrate
+# 4. If we want to revert the changes, we run the command: python manage.py migrate main_app <name of previous migration>
