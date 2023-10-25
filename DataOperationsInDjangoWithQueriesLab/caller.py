@@ -14,29 +14,25 @@ from main_app.models import Student
 # print(Student.objects.get(student_id='1'))
 # print(type(Student.objects.all()))
 
-all_students = [['FC5205', 'John', 'Doje', '1996-05-10', 'johhn.doe@university.com'],
-                ['FC5206', 'John', 'Doge', '1945-05-10', 'jyohn.doe@university.com']
-                ]
+STUDENTS = [
+    {
+        'student_id': '123145',
+        'first_name': 'Emili',
+        'last_name': 'Emili',
+        'birth_date': '1945-05-10',
+        'email': 'jyohn.doe@university.co',
 
+    },
+    {
+        'student_id': '12145',
+        'first_name': 'Emii',
+        'last_name': 'Emii',
+        'birth_date': '1945-05-10',
+        'email': 'jyn.doe@university.co',
 
-def add_students():
-    for student in all_students:
-        new_employee = Student(student_id=student[0],
-                               first_name=student[1],
-                               last_name=student[2],
-                               birth_date=student[3],
-                               email=student[4],
-                               )
-        new_employee.save()
+    },
+]
+for _student in STUDENTS:
+    Student.objects.create(**_student)
 
-        # or
-    # Student.objects.create(
-    #     student_id='FC5205',
-    #     first_name='John',
-    #     last_name='Doje',
-    #     birth_date='1996-05-10',
-    #     email='johhn.doe@university.com',
-    # )
-
-
-add_students()
+print(Student.objects.all())
