@@ -32,8 +32,33 @@ STUDENTS = [
 
     },
 ]
-for _student in STUDENTS:
-    Student.objects.create(**_student)
-    print(Student.objects.create(**_student))
 
-print(Student.objects.all())
+
+# for _student in STUDENTS:
+#     Student.objects.create(**_student)
+#     print(Student.objects.create(**_student))
+
+# print(Student.objects.all())
+
+
+def get_students_info():
+    students = Student.objects.all()
+    students_info = []
+    for student in students:
+        students_info.append(
+            f"Student №{student.student_id}: "
+            f"{student.first_name} {student.last_name}; "
+            f"Email: {student.email}"
+        )
+    return "\n".join(students_info)
+
+
+def update_students_emails():
+    for student in Student.objects.all():
+        new_email = student.email.replace('abv.bg', 'uni-students.com')
+        student.email = new_email
+        student.save()
+        print(student.email)
+
+
+update_students_emails()
