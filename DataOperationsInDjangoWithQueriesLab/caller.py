@@ -16,23 +16,24 @@ from main_app.models import Student
 
 STUDENTS = [
     {
-        'student_id': '123145',
+        'student_id': '11111',
         'first_name': 'Emili',
         'last_name': 'Emili',
         'birth_date': '1945-05-10',
-        'email': 'jyohn.doe@university.co',
+        'email': 'jyohgn.doe@univesity.co',
 
     },
     {
-        'student_id': '12145',
+        'student_id': '22222',
         'first_name': 'Emii',
         'last_name': 'Emii',
         'birth_date': '1945-05-10',
-        'email': 'jyn.doe@university.co',
+        'email': 'jyffn.doe@univerity.co',
 
     },
 ]
 for _student in STUDENTS:
     Student.objects.create(**_student)
+    print(Student.objects.create(**_student))
 
 print(Student.objects.all())
