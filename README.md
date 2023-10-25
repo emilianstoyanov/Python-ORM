@@ -6,6 +6,7 @@ ORM - Object Relational Mapping
 
 [Django Documentation](https://docs.djangoproject.com/en/4.2/)
 
+[Django Extensions Documentation](https://django-extensions.readthedocs.io/en/latest/)
 
 ## Django Commands:
 
