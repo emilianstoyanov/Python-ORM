@@ -61,4 +61,12 @@ def update_students_emails():
         print(student.email)
 
 
-update_students_emails()
+# update_students_emails()
+
+def truncate_students():
+    Student.objects.all().delete()
+
+
+# truncate_students()
+print(Student.objects.all())
+print(f"Number of students: {Student.objects.count()}")
