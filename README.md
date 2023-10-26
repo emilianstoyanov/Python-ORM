@@ -156,9 +156,6 @@ python .\manage.py makemigrations main_app --name  migrate_age_group --empty
 
 ```python
 from appname.models import ModelName  
-```
-
-```python
 data = ModelName.objects.all()
 ```
 
@@ -170,11 +167,8 @@ data = ModelName.objects.filter(fieldname=value)
 
 ### 4. Creating New Records:
 
-```shell
-new_record = ModelName(field1=value1, field2=value2)
-```
-
 ```python
+new_record = ModelName(field1=value1, field2=value2)
 new_record.save()
 ```
 
@@ -182,13 +176,7 @@ new_record.save()
 
 ```python
 record = ModelName.objects.get(pk=pk)
-```
-
-```python
 record.field1 = new_value
-```
-
-```python
 record.save()
 ```
 
@@ -196,9 +184,6 @@ record.save()
 
 ```python
 record = ModelName.objects.get(pk=pk)
-```
-
-```python
 record.delete()
 ```
 
