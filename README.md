@@ -230,5 +230,23 @@ Model.objects.filter(year__gte=2020).values('price', 'price_with_discount')
 **Note: `Returns records that have a year after 2020. In the QuerySet, show the price and the price with the discount (fields in the database)`**
 
 
+### 7. Filter by Boolean value: 
+```python
+unfinished_task = Model.objects.filter(is_finished=False)
+return '\n'.join(str(t) for t in unfinished_task)
+```
+
+**Note: `Filters by boolean value. Returns all records for which the is_finished field in the database is False`**
+
+### 8. Filter by odd IDs: 
+```python
+ for task in Model.objects.all():
+    if task.id % 2 != 0:
+        task.is_finished = True
+        task.save()
+```
+**Note: `Loops through all objects in the database of the given model.Then it checks if the id is odd. If so, set the field is_finished=True.`**
+
+
 
 
