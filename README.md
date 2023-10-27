@@ -187,7 +187,31 @@ record = ModelName.objects.get(pk=pk)
 record.delete()
 ```
 
+## Useful code:
 
+### 1. Updating the first record in the database: 
+
+```python
+Model.objects.filter(pk=1).update(is_capital=True)
+```
+or
+```python
+location = Model.objects.first()
+location.is_capital = True
+location.save()
+```
+
+### 2. Retrieves and returns all records from the database in reverse order: 
+
+```python
+locations = Model.objects.all().order_by('-id')
+return '\n'.join(str(x) for x in locations)
+```
+
+
+
+ 
+   
 
 
 
