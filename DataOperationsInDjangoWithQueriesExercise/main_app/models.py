@@ -1,4 +1,5 @@
 from django.db import models
+from custom_manager import CustomManager
 
 
 # Create your models here.
@@ -53,4 +54,4 @@ class Location(models.Model):
     )
 
     def __str__(self):
-        return self.name
+        return print(f"{self.name} has a population of {self.population}!")

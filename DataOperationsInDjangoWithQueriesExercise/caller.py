@@ -9,27 +9,10 @@ django.setup()
 
 # Create queries within functions
 from main_app.models import Pet, Artifact, Location
-
-PETS = [
-    {
-        'name': 'Buddy',
-        'species': 'Dog'
-    },
-    {
-        'name': 'Whiskers',
-        'species': 'Cat'
-
-    },
-    {
-        'name': 'Rocky',
-        'species': 'Hamster'
-
-    },
-
-]
+from automatic_recording_db import populate_model_with_data
 
 
-def create_pet(name: str, species: str):
+def create_pet(name: str, species: str) -> str:
     Pet.objects.create(
         name=name,
         species=species,
@@ -44,7 +27,7 @@ def create_pet(name: str, species: str):
 # print(create_pet('Rocky', 'Hamster'))
 
 
-def create_artifact(name: str, origin: str, age: int, description: str, is_magical: bool):
+def create_artifact(name: str, origin: str, age: int, description: str, is_magical: bool) -> str:
     Artifact.objects.create(
         name=name,
         origin=origin,
@@ -56,7 +39,7 @@ def create_artifact(name: str, origin: str, age: int, description: str, is_magic
     return f"The artifact {name} is {age} years old!"
 
 
-def delete_all_artifacts():
+def delete_all_artifacts() -> None:
     Pet.objects.all().delete()
 
 
@@ -68,17 +51,20 @@ def delete_all_artifacts():
 
 
 def show_all_locations():
-    for loc in Location.objects.all():
-        print(f"{loc.name} has a population of {loc.population}!")
+    locations = Location.objects.all().order_by('-id')
+    return '\n'.join(str(x) for x in locations)
 
 
-def new_capital():
-    # l = Location.objects.all().first()
-    old_location = Location.objects.all().get(pk=1)
-    old_location.name = 'Varna'
-    old_location.save()
+# print(show_all_locations())
 
 
+def new_capital() -> None:
+    Location.objects.filter(pk=1).update(is_capital=True)
+    # location = Location.objects.first()
+    # location.is_capital = True
+    # location.save()
+
+new_capital()
 def get_capitals():
     return Location.objects.all()
 
@@ -86,11 +72,13 @@ def get_capitals():
 def delete_first_location():
     Location.objects.all().delete()
 
-
-show_all_locations()
-new_capital()
+# show_all_locations()
+# new_capital()
 # show_all_locations()
 
 # print(new_capital())
 # print(get_capitals())
 # delete_first_location()
+
+
+# populate_model_with_data(Location, 10)
