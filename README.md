@@ -262,5 +262,13 @@ encode_and_replace("Zdvk#wkh#glvkhv$", "Simple Task")
 
 **Note: `Filters by title "Simple task", changes description to "Zdvk#wkh#glvkhv$", which decodes to "Wash the dishes!'`**
 
+#### Before:
+
+<img width="405" alt="image" src="https://github.com/emilianstoyanov/Python-ORM/assets/68276889/60582671-4604-4ed9-b0c1-9ee3fa121760">
+
+#### After:
+
+<img width="405" alt="image" src="https://github.com/emilianstoyanov/Python-ORM/assets/68276889/ba3f2eab-ecff-4786-a161-bf8132753c9b">
+
 
 
