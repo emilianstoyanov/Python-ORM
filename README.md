@@ -202,16 +202,32 @@ location.save()
 ```
 
 ### 2. Retrieves and returns all records from the database in reverse order: 
-
 ```python
 locations = Model.objects.all().order_by('-id')
 return '\n'.join(str(x) for x in locations)
 ```
 
+### 3. Deletes all entries in the database: 
+```python
+Model.objects.all().delete()
+```
 
-
- 
+### 4. Deletes the first object: 
+```python
+Model.objects.first().delete()
+```
    
+### 5. Deletes the last object: 
+```python
+Model.objects.last().delete()
+```
+
+### 6. Filter by year: 
+```python
+Model.objects.filter(year__gte=2020).values('price', 'price_with_discount')
+```
+
+**Note: `Returns records that have a year after 2020. In the QuerySet, show the price and the price with the discount (fields in the database)`**
 
 
 
