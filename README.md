@@ -248,5 +248,19 @@ return '\n'.join(str(t) for t in unfinished_task)
 **Note: `Loops through all objects in the database of the given model.Then it checks if the id is odd. If so, set the field is_finished=True.`**
 
 
+### 9. Decodes and replaces the text: 
+
+```python
+def decodes_and_replace(text: str, task_title: str) -> None:
+    decoded_text = ''.join(chr(ord(x) - 3) for x in text) # -> Wash the dishes!
+    Task.objects.filter(title=task_title).update(description=decoded_text)
+
+
+encode_and_replace("Zdvk#wkh#glvkhv$", "Simple Task")
+
+```
+
+**Note: `Filters by title "Simple task", changes description to "Zdvk#wkh#glvkhv$", which decodes to "Wash the dishes!'`**
+
 
 
