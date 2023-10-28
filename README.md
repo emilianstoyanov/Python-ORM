@@ -135,16 +135,18 @@ class Migration(migrations.Migration):
     operations = [
         migrations.RunPython(set_age_group, reverse_code=set_age_group_default)
     ]
-
-1. Create an empty migration file.
-python .\manage.py makemigrations main_app --name  migrate_age_group --empty
-2. We create a function for the specific purpose of changing the database.
-3. We execute the command: python manage.py migrate
-4. If we want to revert the changes, we run the command: python manage.py migrate main_app <name of previous migration>
 ```
+## Steps 
 
-    
-    
+1. Create an empty migration file. 
+    - **run:** `python manage.py makemigrations <app name> --name  <migration name> --empty`
+
+2. Create a function for the specific purpose of a change in a specific model.
+3. Run the following command: 
+    - `python manage.py migrate`
+4. If we want to revert the changes, run the command: 
+    - `python manage.py migrate main_app <name of previous migration>`
+
 
 ## Django ORM Commands:
 
@@ -250,17 +252,26 @@ return '\n'.join(str(t) for t in unfinished_task)
 
 ### 9. Decodes and replaces the text: 
 
-```python
+#### Оptimized solution:
+```python 
 def decodes_and_replace(text: str, task_title: str) -> None:
     decoded_text = ''.join(chr(ord(x) - 3) for x in text) # -> Wash the dishes!
-    Task.objects.filter(title=task_title).update(description=decoded_text)
+    Model.objects.filter(title=task_title).update(description=decoded_text)
 
+encode_and_replace("Zdvk#wkh#glvkhv$", "Simple Task")
+```
+#### Non-optimized solution:
+```python
+tasks_with_matching_title = Model.objects.filter(title=task_title)
+decoded_text = ''.join(chr(ord(x) - 3) for x in text)
+
+    for task in tasks_with_matching_title:
+        task.description = decoded_text
+        task.save()
 
 encode_and_replace("Zdvk#wkh#glvkhv$", "Simple Task")
 
 ```
-
-**Note: `Filters by title "Simple task", changes description to "Zdvk#wkh#glvkhv$", which decodes to "Wash the dishes!'`**
 
 #### Before:
 
@@ -270,5 +281,5 @@ encode_and_replace("Zdvk#wkh#glvkhv$", "Simple Task")
 
 <img width="405" alt="image" src="https://github.com/emilianstoyanov/Python-ORM/assets/68276889/ba3f2eab-ecff-4786-a161-bf8132753c9b">
 
-
+**Note: `Filters by title "Simple task", changes description to "Zdvk#wkh#glvkhv$", which decodes to "Wash the dishes!'`**
 
