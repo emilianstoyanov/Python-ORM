@@ -90,11 +90,12 @@ python manage.py test appname
 ### 13. Creating empty migration file:
 
 ```python
-python .\manage.py makemigrations <main_app> --name  <migrate_age_group> --empty
+python manage.py makemigrations <main_app> --name  <migrate_age_group> --empty
 ```
-
  
-## Example:
+### 14. Edit the Data Migration:
+
+`Open the generated data migration file and modify it to use `RunPython` with a custom Python function.`
 
 ```python 
 from django.db import migrations
@@ -136,17 +137,6 @@ class Migration(migrations.Migration):
         migrations.RunPython(set_age_group, reverse_code=set_age_group_default)
     ]
 ```
-## Steps 
-
-1. Create an empty migration file. 
-    - **run:** `python manage.py makemigrations <app name> --name  <migration name> --empty`
-
-2. Create a function for the specific purpose of a change in a specific model.
-3. Run the following command: 
-    - `python manage.py migrate`
-4. If we want to revert the changes, run the command: 
-    - `python manage.py migrate main_app <name of previous migration>`
-
 
 ## Django ORM Commands:
 
@@ -154,7 +144,7 @@ class Migration(migrations.Migration):
      Define your model in the app's models.py file, then create a migration and apply it.
 
 ### 2. Querying the Database: 
-     You can use Django's QuerySet API to retrieve data from the database. For example:
+#### You can use Django's QuerySet API to retrieve data from the database. For example:
 
 ```python
 from appname.models import ModelName  
