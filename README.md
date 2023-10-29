@@ -42,6 +42,8 @@ DATABASES = {
 
 ## Hide Name, Username, Password and SECRET_KEY
 * 1.Create in your project a file named **.env**
+<img width="667" alt="image" src="https://github.com/emilianstoyanov/Python-ORM/assets/68276889/00c235b0-3d44-45bb-9b43-3e1f95931b6e">
+
 * 2.Add this to the file:
 
     ```python
