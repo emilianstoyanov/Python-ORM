@@ -33,10 +33,54 @@ DATABASES = {
 * **NAME** → Database name e.g. django-project previously created in pgAdmin
  <img width="667" alt="image" src="https://github.com/emilianstoyanov/Python-ORM/assets/68276889/b0bcf050-8686-4b26-bcfd-dcd59a0b3f0a">
 
+
 * **USER** → Database username (default is postgres)
 * **PASSWORD** → Database password
 * **HOST** → Database host (In development stage, use localhost or IP Address 127.0.0.1 also available)
 * **PORT** → The port that used to run the database (Default port is 5432)
+
+
+## Hide Name, Username, Password and SECRET_KEY
+* 1.Create in your project a file named **.env**
+* 2.Add this to the file:
+
+    ```python
+    DATABASES_NAME = 'working-queries-django-lab'
+    DATABASES_USER = 'postgres'
+    DATABASES_PASSWORD = '1234'
+    MY_OWN_KEY = 'django-insecure-cd!p_@ut(kc8)%b_*@)i@kff^oGFrkvy=!c#i!lk9'
+    ```
+* 3.Change the data with yours in the variables!!!
+
+    - DATABASES_NAME
+    - DATABASES_USER
+    - DATABASES_PASSWORD
+    - MY_OWN_KEY
+ 
+* 4.After adding the .env file, the database settings should look like this:
+
+     ```python
+    SECRET_KEY = config('MY_OWN_KEY')
+    ```
+    
+    ```python
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": config('DATABASES_NAME'),
+            "USER": config('DATABASES_USER'),
+            "PASSWORD": config('DATABASES_PASSWORD'),
+            "HOST": "localhost",
+            "PORT": "5432",
+        }
+    }
+    ```
+   
+
+* 5.In your settings.py file add:
+    - `from decouple import config`
+* 6.Run in the Terminal:
+    - pip install python-decouple
 
 ## Django Commands:
 
