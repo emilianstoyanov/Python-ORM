@@ -31,6 +31,8 @@ DATABASES = {
 ```
 
 * **NAME** → Database name e.g. django-project previously created in pgAdmin
+ <img width="667" alt="image" src="https://github.com/emilianstoyanov/Python-ORM/assets/68276889/b0bcf050-8686-4b26-bcfd-dcd59a0b3f0a">
+
 * **USER** → Database username (default is postgres)
 * **PASSWORD** → Database password
 * **HOST** → Database host (In development stage, use localhost or IP Address 127.0.0.1 also available)
