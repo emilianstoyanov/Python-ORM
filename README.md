@@ -283,3 +283,47 @@ encode_and_replace("Zdvk#wkh#glvkhv$", "Simple Task")
 
 **Note: `Filters by title "Simple task", changes description to "Zdvk#wkh#glvkhv$", which decodes to "Wash the dishes!'`**
 
+### 10. Update characteres: 
+
+```python
+# If the class name is "Mage" - increase the level by 3 and decrease the intelligence by 7.
+Model.objects.filter(calss_name="Mage").update(
+    level=F('level') + 3,
+    intelligence=F('intelligence') - 7,
+)
+
+# If the class name is "Warrior" - decrease the hit points by half and increase the dexterity by 4.
+Model.objects.filter(class_name="Warrior").update(
+    hit_points=F('hit_points') / 2,
+    dexterity=F('dexterity') + 4
+)
+
+# If the class name is "Assassin" or "Scout" - update their inventory to "The inventory is empty".
+Model.objects.filter(class_name__in=["Assassin", "Scout"]).update(
+    inventory="The inventory is empty",
+)
+```
+**Note: `An F() object represents the value of a model field, transformed value of a model field, or annotated column. It makes it possible to refer to model field values and perform database operations using them without actually having to pull them out of the database into Python memory. Instead, Django uses the F() object to generate an SQL expression that describes the required operation at the database level.`**
+
+
+### 11. Update a field in the database of a specific model. With SQL query and Python ORM on database column named "class_name" with value "Mage": 
+
+
+```SQL
+
+SQL query:
+
+        UPDATE <model>
+        SET level = level + 3
+        WHERE class_name = "Mage";  
+
+
+Python ORM:
+
+        Model.objects.filter(calss_name="Mage").update(
+            level=F('level') + 3,
+        )
+``` 
+
+
+
