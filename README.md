@@ -8,8 +8,35 @@ ORM - Object Relational Mapping
 
 [Django Extensions Documentation](https://django-extensions.readthedocs.io/en/latest/)
 
-## Django Commands:
 
+## How to Start Django Project with a Database(PostgreSQL):
+
+* Navigate to settings.py
+* Approximately, in line 76 of code, this is the database config part
+* Copy the code below, then change it to your corresponding parameters
+
+
+
+```python
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": '',
+        "USER": '',
+        "PASSWORD": '',
+        "HOST": "localhost",
+        "PORT": "5432",
+    }
+}
+```
+
+* **NAME** → Database name e.g. django-project previously created in pgAdmin
+* **USER** → Database username (default is postgres)
+* **PASSWORD** → Database password
+* **HOST** → Database host (In development stage, use localhost or IP Address 127.0.0.1 also available)
+* **PORT** → The port that used to run the database (Default port is 5432)
+
+## Django Commands:
 
 ### 1.  Creating a New Django Project:
 
@@ -314,6 +341,7 @@ Python ORM:
             level=F('level') + 3,
         )
 ``` 
+
 
 
 
