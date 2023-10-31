@@ -419,4 +419,4 @@ Model.objects.filter(Q(brand='Lenovo') | Q(brand='Asus')).update(storage=512)
 Model.objects.filter(brand_in=['Lenovo', 'Asus']).update(storage=512)
 ```
 
-**Note: The database field names are 'brand' and 'storage**
+**Note: `The database field names are 'brand' and 'storage`**
