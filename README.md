@@ -391,5 +391,19 @@ Python ORM:
 ``` 
 
 
+### 12. Filter by two parameters: 
+
+```python
+best_artwork = Model.objects.order_by('-rating', 'id').first()
+```
+- **'-rating':** Filter by the 'rating' field and take the entry with the highest rating.
+- **'id'**: If all records have the same rating then filter and take the record with the highest 'id'.
 
 
+### 13. Deletes all objects that have a negative rating. 0 (zero) is considered positive:
+
+```python
+Model.objects.filter(rating__lt=0).delete()
+```
+* rating__lt < 0 (delete all entries below zero)
+* ratin <= 0 (delete all entries below zero including zero)
