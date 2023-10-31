@@ -407,3 +407,16 @@ Model.objects.filter(rating__lt=0).delete()
 ```
 * rating__lt < 0 (delete all entries below zero)
 * ratin <= 0 (delete all entries below zero including zero)
+
+
+### 14. Update the storage of the brand if it is 'Lenovo' or 'Asus':
+
+```python
+Model.objects.filter(Q(brand='Lenovo') | Q(brand='Asus')).update(storage=512)
+```
+
+```python
+Model.objects.filter(brand_in=['Lenovo', 'Asus']).update(storage=512)
+```
+
+**Note: The database field names are 'brand' and 'storage**
