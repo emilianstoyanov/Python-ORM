@@ -420,3 +420,27 @@ Model.objects.filter(brand_in=['Lenovo', 'Asus']).update(storage=512)
 ```
 
 **Note: `The database field names are 'brand' and 'storage`**
+
+
+### 15. Updates the operation system for every laptop:
+
+```python
+Laptop.objects.filter(brand=['Asus']).update(operation_system='Windows')
+Laptop.objects.filter(brand=['Apple']).update(operation_system='MacOS')
+Laptop.objects.filter(brand__in=['Dell', 'Acer']).update(operation_system='Linux')
+Laptop.objects.filter(brand=['Lenovo']).update(operation_system='Chrome OS')
+```
+
+#### Optimization:
+```python
+Laptop.objects.update(
+    operation_system=Case(
+        When(brand=['Asus'], then=Value('Windows')),
+        When(brand=['Apple'], then=Value('MacOS')),
+        When(brand=['Dell', 'Acer'], then=Value('Linux')),
+        When(brand=['Lenovo'], then=Value('Chrome OS')),
+        default=F('operation_system')
+    )
+)
+```
+**Note: `It checks the laptop brand and records the specific operating system.`**
