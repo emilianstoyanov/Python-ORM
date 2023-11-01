@@ -294,7 +294,7 @@ Model.objects.last().delete()
 Model.objects.filter(year__gte=2020).values('price', 'price_with_discount')
 ```
 
-**Note: `Returns records that have a year after 2020. In the QuerySet, show the price and the price with the discount (fields in the database)`**
+**Note: `Returns records that have a year after 2020. In the QuerySet, show the price and the price with the discount (fields in the database).`**
 
 
 ### 7. Filter by Boolean value: 
@@ -303,7 +303,7 @@ unfinished_task = Model.objects.filter(is_finished=False)
 return '\n'.join(str(t) for t in unfinished_task)
 ```
 
-**Note: `Filters by boolean value. Returns all records for which the is_finished field in the database is False`**
+**Note: `Filters by boolean value. Returns all records for which the is_finished field in the database is False.`**
 
 ### 8. Filter by odd IDs: 
 ```python
@@ -419,7 +419,7 @@ Model.objects.filter(Q(brand='Lenovo') | Q(brand='Asus')).update(storage=512)
 Model.objects.filter(brand_in=['Lenovo', 'Asus']).update(storage=512)
 ```
 
-**Note: `The database field names are 'brand' and 'storage`**
+**Note: `The database field names are 'brand' and 'storage.`**
 
 
 ### 15. Updates the operation system for every laptop:
@@ -447,3 +447,12 @@ Laptop.objects.update(
 * We import them from django: **Value(), When(), F()**
 
 **Note: `It checks the laptop brand and records the specific operating system.`**
+
+
+
+### 16. Exlude:
+
+```python
+Model.objects.exlude(difficulty='Easy').update(boss_health=500)
+```
+**Note: `Exclude all entries except entry with difficulty 'Easy'. And updated it with boss_health=500.`**
