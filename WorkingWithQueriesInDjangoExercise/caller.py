@@ -3,12 +3,14 @@ from typing import List
 
 import django
 
+from automatic_recording_db import populate_model_with_data
+
 # Set up Django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "orm_skeleton.settings")
 django.setup()
 
-from main_app.models import ArtWorkGallery, Laptop, ChessPlayer
-from django.db.models import Case, When, Value, F
+from main_app.models import ArtWorkGallery, Laptop, ChessPlayer, Dungeon, Workout
+from django.db.models import Case, When, Value, F, QuerySet
 
 
 def show_highest_rated_art() -> str:
@@ -110,3 +112,136 @@ def grand_chess_title_regular_player() -> None:
     ChessPlayer.objects.filter(rating__range=[0, 2199]).update(title="regular player")
 
 
+def set_new_chefs() -> None:
+    ChessPlayer.objects.update(
+        chef=Case(
+            When(type=['Breakfast'], then=Value('Gordon Ramsa')),
+            When(type=['Lunch'], then=Value('Julia Chil')),
+            When(type=['Dinner'], then=Value('Jamie Olive')),
+            When(type=['Snack'], then=Value('Thomas Keller')),
+            default=F('chef'),
+        )
+    )
+
+
+def set_new_preparation_times() -> None:
+    ChessPlayer.objects.update(
+        meal_type=Case(
+            When(type=['Breakfast'], then=Value('10 minutes')),
+            When(type=['Lunch'], then=Value('12 minutes')),
+            When(type=['Dinner'], then=Value('15 minutes')),
+            When(type=['Snack'], then=Value('5 minutes')),
+            default=F('meal_type'),
+        )
+    )
+
+
+def update_low_calorie_meals() -> None:
+    ChessPlayer.objects.filter(meal_type__in=['Breakfast', 'Dinner']).update(meals=400)
+
+
+def update_high_calorie_meals() -> None:
+    ChessPlayer.objects.filter(meal_type__in=['Lunch', 'Snack']).update(meals=700)
+
+
+def delete_lunch_and_snack_meals() -> None:
+    ChessPlayer.objects.filter(meal_type__in=['Lunch', 'Snack']).delete()
+
+
+def show_hard_dungeons() -> str:
+    hard_dungeons = Dungeon.objects.filter(difficulty='Hard').order_by('-location')
+
+    return '\n'.join(str(x) for x in hard_dungeons)
+
+
+def bulk_create_dungeons(*args) -> None:
+    Dungeon.objects.bulk_create(*args)
+
+
+def update_dungeon_names() -> None:
+    Dungeon.objects.update(
+        name=Case(
+            When(difficulty=['Easy'], then=Value('The Erased Thomb')),
+            When(difficulty=['Medium'], then=Value('The Coral Labyrint')),
+            When(difficulty=['Hard'], then=Value('The Lost Haun')),
+            default=F('name'),
+        )
+    )
+
+
+def update_dungeon_bosses_health() -> None:
+    Dungeon.objects.exlude(difficulty='Easy').update(boss_health=500)
+
+
+def update_dungeon_recommended_levels() -> None:
+    Dungeon.objects.update(
+        recommended_level=Case(
+            When(difficulty=['Easy'], then=Value(25)),
+            When(difficulty=['Medium'], then=Value(50)),
+            When(difficulty=['Hard'], then=Value(75)),
+            default=F('recommended_level'),
+        )
+    )
+
+
+def update_dungeon_rewards() -> None:
+    Dungeon.objects.update(
+        reward=Case(
+            When(boss_health=500, then=Value('1000 Gold')),
+            When(location__startswith='E', then=Value('New dungeon unlocked')),
+            When(location__endswith='s', then=Value('Dragonheart Amuled')),
+            default=F('reward'),
+        )
+    )
+
+
+def set_new_locations() -> None:
+    Dungeon.objects.update(
+        location=Case(
+            When(recommended_level=25, then=Value('Enchanted Maz')),
+            When(recommended_level=50, then=Value('Grimstone Mine')),
+            When(recommended_level=75, then=Value('Shadowed Abys')),
+            default=F('location'),
+        )
+    )
+
+
+def show_workouts() -> str:
+    calisthenics_crossfit_workouts = Workout.objects.filter(
+        workout_type__in=['Calisthenics', 'CrossFit'])
+
+    return '\n'.join(str(n) for n in calisthenics_crossfit_workouts)
+
+
+def get_high_difficulty_cardio_workouts() -> QuerySet:
+    return Workout.objects.filter(workout_type='Cardio', difficulty='High').order_by('instructor')
+
+
+def set_new_instructors() -> None:
+    Workout.objects.update(
+        instructor=Case(
+            When(workout_type='Cardio', then=Value('John Smit')),
+            When(workout_type='Strength', then=Value('Michael William')),
+            When(workout_type='Yoga', then=Value('Emily Johnso')),
+            When(workout_type='CrossFit', then=Value('Sarah Davi')),
+            When(workout_type='Calisthenics', then=Value('Chris Heria')),
+            default=F('instructor'),
+        )
+    )
+
+
+def set_new_duration_times() -> None:
+    Workout.objects.update(
+        duration=Case(
+            When(instructor='John Smith', then=Value('15 minutes')),
+            When(instructor='Sarah Davis', then=Value('30 minutes')),
+            When(instructor='Chris Heria', then=Value('45 minute')),
+            When(instructor='Michael William', then=Value('1 hour')),
+            When(instructor='Emily Johnson', then=Value('1 hour and 30 minutes')),
+            default=F('duration'),
+        )
+    )
+
+
+def delete_workouts() -> None:
+    Workout.objects.exclude(workout_type__in=['Strength', 'Calisthenics']).delete()
