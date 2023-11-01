@@ -443,4 +443,7 @@ Laptop.objects.update(
     )
 )
 ```
+
+* We import them from django: **Value(), When(), F()**
+
 **Note: `It checks the laptop brand and records the specific operating system.`**
