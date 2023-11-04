@@ -506,5 +506,7 @@ Model.objects.exlude(difficulty='Easy').update(boss_health=500)
         def __str__(self):
             return f"{self.name}"
     ```
+   <img width="529" alt="image" src="https://github.com/emilianstoyanov/Python-ORM/assets/68276889/29235378-700a-4a1a-b324-85bbfb9c0da6">
+
 
     **Note:` Lecturer can have many subjects. One subject can have one lecturer`**
