@@ -213,6 +213,32 @@ class Migration(migrations.Migration):
     ]
 ```
 
+### 15.  Shell debugging:
+
+* install: `pip install ipython`
+* Run in the Terminal: 
+
+    ```python
+    python manage.py shell
+    ```
+
+**Note:` When you run python manage.py shell you run a python (or IPython) interpreter but inside it load all your Django project configurations so you can execute commands against the database or any other resources that are available in your Django project`**
+
+
+### 16. Delete all migrations:
+1.
+    ```python
+    python manage.py migrate <app_name> zero
+    ```
+
+    2. Delete all migrations from the 'migrations' folder.
+    3. python manage.py makemigrations.
+    4. python manage.py migrate.
+
+
+
+
+
 ## Django ORM Commands:
 
 ### 1. Creating a New Model: 
@@ -506,7 +532,6 @@ Model.objects.exlude(difficulty='Easy').update(boss_health=500)
         def __str__(self):
             return f"{self.name}"
     ```
-   <img width="529" alt="image" src="https://github.com/emilianstoyanov/Python-ORM/assets/68276889/29235378-700a-4a1a-b324-85bbfb9c0da6">
 
+    **Note:` Lecturer can have many subjects. One subject can have one lecturer.`**
 
-    **Note:` Lecturer can have many subjects. One subject can have one lecturer`**
