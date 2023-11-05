@@ -1,11 +1,12 @@
 import os
 import django
+from django.db.models import QuerySet, Sum, Count
 
 # Set up Django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "orm_skeleton.settings")
 django.setup()
 
-from main_app.models import Author, Book
+from main_app.models import Author, Book, Artist, Song, Product, Review
 
 
 def show_all_authors_with_their_books() -> str:
@@ -25,33 +26,55 @@ def show_all_authors_with_their_books() -> str:
     return '\n'.join(authors_with_books)
 
 
-# Import your models here
+def delete_all_authors_without_books() -> str:
+    Author.objects.filter(book__isnull=True).delete()
 
-# Create queries within functions
 
-# Create authors
+def add_song_to_artist(artist_name: str, song_title: str) -> None:
+    artist = Artist.objects.get(name=artist_name)
+    song = Song.objects.get(title=song_title)
 
-# author1 = Author.objects.create(name="J.K. Rowling")
-#
-# author2 = Author.objects.create(name="George Orwell")
-#
-# author3 = Author.objects.create(name="Harper Lee")
-#
-# author4 = Author.objects.create(name="Mark Twain")
-#
-# # Create books associated with the authors
-# book1 = Book.objects.create(
-#
-#     title="Harry Potter and the Philosopher's Stone",
-#
-#     price=19.99,
-#
-#     author=author1
-#
-# )
-# book2 = Book.objects.create(title="1984", price=14.99, author=author2)
-# book3 = Book.objects.create(title="To Kill a Mockingbird", price=12.99, author=author3)
-# Display authors and their books
-authors_with_books = show_all_authors_with_their_books()
-print(authors_with_books)  # Delete authors without books delete_all_authors_without_books()
-# print(Author.objects.count())
+    artist.songs.add(song)
+
+
+def get_songs_by_artist(artist_name: str) -> QuerySet[Song]:
+    artist = Artist.objects.get(name=artist_name)
+    return artist.songs.all().order_by('-id')
+
+
+def remove_song_from_artist(artist_name: str, song_title: str) -> None:
+    artist = Artist.objects.get(name=artist_name)
+    song = Song.objects.get(title=song_title)
+
+    artist.songs.remove(song)
+
+
+def calculate_average_rating_for_product_by_name(product_name: str) -> float:
+    product = Product.objects.get(name=product_name)
+    reviews = product.reviews.all()
+
+    total_rating = sum(r.rating for r in reviews)
+    average_rating = total_rating / len(reviews)
+
+    return average_rating
+
+    # better way
+    # product = Product.objects.annotate(
+    #     total_ratings=Sum('review__rating'),
+    #     num_reviews=Count('review')
+    # ).get(name=product_name)
+    #
+    # average_rating = product.total_ratings / product.num_reviews
+    # return average_rating
+
+
+def get_reviews_with_high_ratings(threshold: int) -> QuerySet[Review]:
+    return Review.objects.filter(rating__gte=threshold)
+
+
+def get_products_with_no_reviews() -> QuerySet[Product]:
+    return Product.objects.filter(reviews__isnull=True).order_by('name')
+
+
+def delete_products_without_reviews() -> None:
+    Product.objects.filter(reviews__isnull=True).delete()
