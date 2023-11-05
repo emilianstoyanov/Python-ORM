@@ -95,4 +95,4 @@ class DrivingLicense(models.Model):
 
     def __str__(self):
         expiration_date = self.issue_date + timedelta(days=365)
-        return f"License with id: {self.id} expires on {expiration_date}!"
+        return f"License with id: {self.license_number} expires on {expiration_date}!"
