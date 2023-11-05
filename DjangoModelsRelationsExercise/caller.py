@@ -1,4 +1,6 @@
 import os
+from datetime import timedelta, date
+
 import django
 from django.db.models import QuerySet, Sum, Count
 
@@ -6,7 +8,7 @@ from django.db.models import QuerySet, Sum, Count
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "orm_skeleton.settings")
 django.setup()
 
-from main_app.models import Author, Book, Artist, Song, Product, Review
+from main_app.models import Author, Book, Artist, Song, Product, Review, DrivingLicense, Driver
 
 
 def show_all_authors_with_their_books() -> str:
@@ -78,3 +80,20 @@ def get_products_with_no_reviews() -> QuerySet[Product]:
 
 def delete_products_without_reviews() -> None:
     Product.objects.filter(reviews__isnull=True).delete()
+
+
+def calculate_licenses_expiration_dates() -> str:
+    licenses = DrivingLicense.objects.order_by('-license_number')
+
+    return '\n'.join(str(l) for l in licenses)
+
+
+def get_drivers_with_expired_licenses(due_date) -> QuerySet[Driver]:
+    expiration_cutoff_date = due_date - timedelta(days=365)
+
+    expired_drivers = Driver.objects.filter(drivinglicense__issue_date__gt=expiration_cutoff_date)
+
+    return expired_drivers
+
+
+

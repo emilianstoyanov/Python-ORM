@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from django.db import models
 
 
@@ -66,3 +68,31 @@ class Review(models.Model):
         blank=True,
         related_name="reviews",
     )
+
+
+class Driver(models.Model):
+    first_name = models.CharField(
+        max_length=50,
+    )
+
+    last_name = models.CharField(
+        max_length=50,
+    )
+
+
+class DrivingLicense(models.Model):
+    license_number = models.CharField(
+        max_length=10,
+        unique=True,
+    )
+
+    issue_date = models.DateField()
+
+    driver = models.OneToOneField(
+        to=Driver,
+        on_delete=models.CASCADE,
+    )
+
+    def __str__(self):
+        expiration_date = self.issue_date + timedelta(days=365)
+        return f"License with id: {self.id} expires on {expiration_date}!"
