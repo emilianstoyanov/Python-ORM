@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 
 
@@ -50,8 +51,19 @@ class ZooKeeper(Employee):
 
     )
 
+    def clean(self):
+        super().clean()
+
+        if self.specialty not in self.Specialities:
+            raise ValidationError('Speciality must be a valid choice.')
+
 
 class Veterinarian(Employee):
     license_number = models.CharField(
         max_length=10,
     )
+
+
+class ZooDisplayAnimal(Animal):
+    class Meta:
+        proxy = True
