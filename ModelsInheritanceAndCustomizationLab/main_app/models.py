@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.core.exceptions import ValidationError
 from django.db import models
 
@@ -10,7 +12,10 @@ class Animal(models.Model):
     birth_date = models.DateField()
     sound = models.CharField(max_length=100)
 
-
+    @property
+    def age(self):
+        today = date.today()
+        age = today.year - self.birth_date.year - ((today.month, today.day) < (self.birth_date.month, self.birth_date.day))
 class Mammal(Animal):
     fur_color = models.CharField(max_length=50)
 
