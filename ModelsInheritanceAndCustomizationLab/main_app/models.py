@@ -33,6 +33,9 @@ class Employee(models.Model):
     class Meta:
         abstract = True
 
+    def get_full_name(self):
+        return f"{self.first_name} + {self.last_name}"
+
 
 class ZooKeeper(Employee):
     class Specialities(models.TextChoices):
@@ -67,3 +70,21 @@ class Veterinarian(Employee):
 class ZooDisplayAnimal(Animal):
     class Meta:
         proxy = True
+
+    def __extra_info(self):
+        extra_info = ''
+        import ipdb; ipdb.set_trace()
+        if hasattr(self, 'mammal'):
+            extra_info = f"Its fur color is {self.mammal.fur_color}"
+        elif hasattr(self, 'bird'):
+            extra_info = f"Its wingspan is {self.bird.wing_span} sm."
+        elif hasattr(self, 'reptile'):
+            extra_info = f"Its scale type is {self.reptile.scale_type}."
+        return extra_info
+
+    def display_info(self):
+        return (f"Meet {self.name}! It's {self.species} and it's born {self.birth_date}. "
+                f"It makes a noise like '{self.sound}'!{self.__extra_info()}")
+
+    def is_endangered(self):
+        return True if self.species in ["Cross River Gorilla", "Orangutan", "Green Turtle"] else False
