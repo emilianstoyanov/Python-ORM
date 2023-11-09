@@ -83,7 +83,7 @@ DATABASES = {
     - `from decouple import config`
 * 6.Run in the Terminal:
     - pip install python-decouple
-
+    
 ## Django Commands:
 
 ### 1.  Creating a New Django Project:
@@ -236,6 +236,18 @@ class Migration(migrations.Migration):
     4. python manage.py migrate.
 
 
+
+### 17. Debug with ipdb:
+
+```python
+pip install ipdb
+```
+
+We put this where we want to debug:
+
+```python
+import ipdb; ipdb.set_trace()
+```
 
 
 
