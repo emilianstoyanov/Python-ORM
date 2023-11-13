@@ -236,6 +236,9 @@ class Room(models.Model):
 
 
 class BaseReservation(models.Model):
+    class Meta:
+        abstract = True
+
     room = models.ForeignKey(
         to=Room,
         on_delete=models.CASCADE,
@@ -245,5 +248,25 @@ class BaseReservation(models.Model):
 
     end_date = models.DateField()
 
-    class Meta:
-        abstract = True
+    def reservation_period(self) -> int:
+        return (self.end_date - self.start_date).days
+
+    def calculate_total_cost(self) -> str:
+        total_cost = self.reservation_period() * self.room.price_per_night
+
+        return f"{total_cost:.1f}"
+
+    @property
+    def is_available(self):
+        reservations = self.__class__.objects.filter(
+            room=self.room,
+            end_date__gte=self.start_date,
+            start_date__lte=self.end_date,
+        )
+
+        return not reservations.exist()
+
+
+    def clean(self):
+        if self.start_date >= self.end_date:
+            raise ValidationError("Start date cannot be after or in the same end date")
